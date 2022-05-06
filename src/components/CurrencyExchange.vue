@@ -21,49 +21,106 @@
 </template>
 
 <script>
-import { store } from "@/utils/store";
+import { store } from "../utils/store";
 import CurrencyInput from "./CurrencyInput.vue";
 import { calculateExchange } from "../utils/calculateExchange";
 import { assembleExchangeChartData } from "../utils/assembleExchangeChartData";
-import { ref, onMounted, computed } from "vue";
+import { ref, computed, defineComponent } from "vue";
 
 import { LineChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
-
 Chart.register(...registerables);
 
-export default {
+export default defineComponent({
+  name: "CurrencyExchange",
   components: {
     CurrencyInput,
     LineChart,
   },
-  data() {
-    return {
-      store,
-      amount1: 1,
-      amount2: 1,
-      selectedCurrency1: "btc",
-      selectedCurrency2: "btc",
-    };
-  },
   setup() {
+    const amount1 = ref(1);
+    const amount2 = ref(1);
+    const selectedCurrency1 = ref("btc");
+    const selectedCurrency2 = ref("btc");
     const exchangeChartRef = ref();
-    onMounted(() => {
-      // console.log(exchangeChartRef.value.chartInstance);
-      exchangeChartRef.value.chartInstance.toBase64Image();
-    });
+    // onMounted(() => {
+    //   // console.log(exchangeChartRef.value.chartInstance);
+    //   exchangeChartRef.value.chartInstance.toBase64Image();
+    // });
     // let gradient = exchangeChartRef.value
     //   .getContext("2d")
     //   .createLinearGradient(0, 0, 0, 400); // from the bottom to the top
     // gradient.addColorStop(0, "rgba(58,123,213,1)");
     // gradient.addColorStop(1, "rgba(0,210,255,.3)");
 
-    const { chartData, options } = assembleExchangeChartData();
+    const chartData = computed(() => {
+      if (!store.btcMarketChartData || !store.ethMarketChartData) {
+        return {};
+      }
 
-    return { chartData, options, exchangeChartRef };
+      switch (selectedCurrency1.value) {
+        case "btc":
+          if (selectedCurrency2.value === "usd")
+            return assembleExchangeChartData(store.btcMarketChartData);
+          else if (selectedCurrency2.value === "eth")
+            return assembleExchangeChartData(
+              store.btcMarketChartData,
+              store.ethMarketChartData
+            );
+          else
+            return assembleExchangeChartData(
+              store.btcMarketChartData,
+              store.btcMarketChartData
+            );
+          break;
+        // else return assembleExchangeChartData();
+        case "eth":
+          if (selectedCurrency2.value === "usd")
+            return assembleExchangeChartData(store.ethMarketChartData);
+          else if (selectedCurrency2.value === "btc")
+            return assembleExchangeChartData(
+              store.ethMarketChartData,
+              store.btcMarketChartData
+            );
+          else
+            return assembleExchangeChartData(
+              store.ethMarketChartData,
+              store.ethMarketChartData
+            );
+          break;
+        default:
+          return assembleExchangeChartData(
+            store.btcMarketChartData,
+            store.btcMarketChartData
+          );
+          break;
+      }
+    });
+
+    const options = ref({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Chart.js Doughnut Chart",
+        },
+      },
+    });
+
+    return {
+      store,
+      chartData,
+      exchangeChartRef,
+      amount1,
+      amount2,
+      selectedCurrency1,
+      selectedCurrency2,
+      options,
+    };
   },
-
-  mounted() {},
 
   methods: {
     onUpdateCurrencyInputFirst() {
@@ -87,7 +144,7 @@ export default {
       this.amount1 = target;
     },
   },
-};
+});
 </script>
 
 <style>

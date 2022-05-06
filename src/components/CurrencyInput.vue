@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="rates">
-      <input type="number" v-model="inputValue" step="0.01" />
+      <input type="number" v-model="inputValue" step="0.01" min="0" />
       <select name="rates" id="rates" v-model="selectorValue">
         <option v-for="(value, key) in rates" :key="key" :value="key">
           {{ value.unit }}
