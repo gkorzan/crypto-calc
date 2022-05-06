@@ -8,7 +8,7 @@ export const calculateExchange = (value, target, currency, targetCurrency, rates
         targetCurrency &&
         rates
       ) {
-        console.log(rates);
+        // console.log(rates);
         const btc1 = value / rates[currency].value;
         target = btc1 * rates[targetCurrency].value;
       }
