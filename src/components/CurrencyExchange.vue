@@ -25,7 +25,7 @@ import { store } from "@/utils/store";
 import CurrencyInput from "./CurrencyInput.vue";
 import { calculateExchange } from "../utils/calculateExchange";
 import { assembleExchangeChartData } from "../utils/assembleExchangeChartData";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 
 import { LineChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
@@ -49,7 +49,7 @@ export default {
   setup() {
     const exchangeChartRef = ref();
     onMounted(() => {
-      console.log(exchangeChartRef.value.chartInstance);
+      // console.log(exchangeChartRef.value.chartInstance);
       exchangeChartRef.value.chartInstance.toBase64Image();
     });
     // let gradient = exchangeChartRef.value
@@ -64,13 +64,7 @@ export default {
   },
 
   mounted() {},
-  computed: {
-    rates: {
-      get() {
-        return store.rates;
-      },
-    },
-  },
+
   methods: {
     onUpdateCurrencyInputFirst() {
       const { value, target, currency, targetCurrency } = calculateExchange(
@@ -78,7 +72,7 @@ export default {
         this.amount2,
         this.selectedCurrency1,
         this.selectedCurrency2,
-        this.rates
+        this.store.rates
       );
       this.amount2 = target;
     },
@@ -88,7 +82,7 @@ export default {
         this.amount1,
         this.selectedCurrency2,
         this.selectedCurrency1,
-        this.rates
+        this.store.rates
       );
       this.amount1 = target;
     },
