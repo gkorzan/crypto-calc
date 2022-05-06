@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <a href="#/">Home</a> | <a href="#/second">About</a> |
+  <!-- <a href="#/non-existent-path">Broken Link</a> -->
+  <component :is="currentView" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Home from "./components/HomePage.vue";
+import SecondPageVue from "./components/SecondPage.vue";
+// import About from "./About.vue";
+// import NotFound from "./NotFound.vue";
+
+const routes = {
+  "/": Home,
+  "/second": SecondPageVue,
+};
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      currentPath: window.location.hash,
+    };
+  },
+  computed: {
+    currentView() {
+      return routes[this.currentPath.slice(1) || "/"] || <h1>NotFound</h1>;
+    },
+  },
+  mounted() {
+    window.addEventListener("hashchange", () => {
+      this.currentPath = window.location.hash;
+    });
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
