@@ -1,6 +1,6 @@
 // assembleExchangeChartData.js
 
-export const assembleExchangeChartData = (rawData1, rawData2) => {
+export const assembleExchangeChartData = (rawData1, rawData2, reverse) => {
       let dayLabels = null;
       let dayPrices = null;
 
@@ -22,7 +22,11 @@ export const assembleExchangeChartData = (rawData1, rawData2) => {
       for (let i in rawData1.prices) {
         dayPrices.push(rawData1.prices[i][1] / rawData2.prices[i][1])
       }
-      // rawData1.prices.map((price) => price[1]);
+    }
+
+    //if graph should be reversed
+    if (dayPrices && reverse) {
+      dayPrices = dayPrices.map(price => 1/price);
     }
       let delayed;
 
