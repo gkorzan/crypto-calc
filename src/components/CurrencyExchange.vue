@@ -1,22 +1,26 @@
 <template>
-  <div>
-    <currency-input
-      v-model:amount="amount1"
-      v-model:selectedCurrency="selectedCurrency1"
-      @update:amount="onUpdateCurrencyInputFirst"
-      @update:selectedCurrency="onUpdateCurrencyInputFirst"
-    />
-    <currency-input
-      v-model:amount="amount2"
-      v-model:selectedCurrency="selectedCurrency2"
-      @update:amount="onUpdateCurrencyInputSecond"
-      @update:selectedCurrency="onUpdateCurrencyInputFirst"
-    />
-    <LineChart
-      ref="exchangeChartRef"
-      :chartData="chartData"
-      :options="options"
-    />
+  <div class="exchange-container">
+    <div class="inputs">
+      <currency-input
+        v-model:amount="amount1"
+        v-model:selectedCurrency="selectedCurrency1"
+        @update:amount="onUpdateCurrencyInputFirst"
+        @update:selectedCurrency="onUpdateCurrencyInputFirst"
+      />
+      <currency-input
+        v-model:amount="amount2"
+        v-model:selectedCurrency="selectedCurrency2"
+        @update:amount="onUpdateCurrencyInputSecond"
+        @update:selectedCurrency="onUpdateCurrencyInputFirst"
+      />
+    </div>
+    <div class="chart">
+      <LineChart
+        ref="exchangeChartRef"
+        :chartData="chartData"
+        :options="options"
+      />
+    </div>
   </div>
 </template>
 
@@ -88,6 +92,25 @@ export default defineComponent({
               store.ethMarketChartData
             );
           break;
+        case "usd":
+          if (selectedCurrency2.value === "btc")
+            return assembleExchangeChartData(
+              store.btcMarketChartData,
+              null,
+              true
+            );
+          else if (selectedCurrency2.value === "eth")
+            return assembleExchangeChartData(
+              store.ethMarketChartData,
+              null,
+              true
+            );
+          else
+            return assembleExchangeChartData(
+              store.btcMarketChartData,
+              store.btcMarketChartData
+            );
+          break;
         default:
           return assembleExchangeChartData(
             store.btcMarketChartData,
@@ -101,10 +124,10 @@ export default defineComponent({
       responsive: true,
       plugins: {
         legend: {
-          position: "top",
+          position: "bottom",
         },
         title: {
-          display: true,
+          display: false,
           text: "Chart.js Doughnut Chart",
         },
       },
@@ -147,5 +170,27 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
+.exchange-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card-color);
+  padding: 3em;
+  border-radius: 16px;
+  box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.2);
+  gap: 1.5em;
+}
+.inputs {
+  flex-grow: 1;
+  min-width: 30%;
+  /* row-gap: 1.5em; */
+}
+.chart {
+  flex-grow: 1;
+}
+@media only screen and (min-width: 1200px) {
+  .exchange-container {
+    flex-direction: row;
+  }
+}
 </style>

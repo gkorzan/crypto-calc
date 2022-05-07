@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <div v-if="rates">
-      <input type="number" v-model="inputValue" step="0.01" min="0" />
-      <select name="rates" id="rates" v-model="selectorValue">
-        <option v-for="(value, key) in rates" :key="key" :value="key">
-          {{ value.unit }}
-        </option>
-      </select>
-    </div>
-    <div v-else>Loading...</div>
+  <div v-if="rates" class="wrapper">
+    <input type="number" v-model="inputValue" step="0.01" min="0" />
+    <select name="rates" id="rates" v-model="selectorValue">
+      <option v-for="(value, key) in rates" :key="key" :value="key">
+        {{ value.unit }}
+      </option>
+    </select>
   </div>
+  <div v-else>Loading...</div>
 </template>
 
 <script>
@@ -51,9 +49,45 @@ export default {
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    validateInputField(inputValue) {
+      return inputValue.replace(/[^0-9]/g, "");
+    },
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+input[type="number"] {
+  width: 70%;
+  flex-grow: 2;
+  padding: 10px;
+  background-color: var(--bg-card-color);
+  border-radius: var(--border-radius);
+  border: solid 1px var(--divider);
+  color: var(--color-primary);
+}
+select {
+  flex-grow: 1;
+  width: 30%;
+  height: inherit !important;
+  font-size: var(--text-sm-2) !important;
+  padding: 10px !important;
+  border: solid 1px var(--divider) !important;
+  border-radius: var(--border-radius) !important;
+  color: var(--color-gray-3);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent
+    url("data:image/svg+xml,%3Csvg stroke='%23A6B0C3' fill='%23A6B0C3' xmlns='http://www.w3.org/2000/svg' width='13' height='8' viewBox='0 0 13 8'%3E%3Cpath fill-rule='evenodd' d='M7.618 6.972a1.2 1.2 0 01-1.697 0L1.204 2.254a.8.8 0 011.132-1.131L6.77 5.557l4.434-4.434a.8.8 0 011.132 1.131L7.618 6.972z' clip-rule='evenodd'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat right 0.35rem center/.4rem 0.5rem;
+}
 </style>

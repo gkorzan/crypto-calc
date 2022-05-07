@@ -1,6 +1,6 @@
 <template>
   <div>
-    SecondPage
+    <h1>Crypto-Portfolio</h1>
     <crypto-portfolio />
   </div>
 </template>
