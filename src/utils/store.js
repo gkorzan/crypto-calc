@@ -1,5 +1,5 @@
 // store.js
-import { reactive, computed } from 'vue'
+import { reactive, computed } from "vue";
 
 export const store = reactive({
   rates: null,
@@ -7,15 +7,15 @@ export const store = reactive({
   btcMarketChartData: null,
   ethMarketChartData: null,
   setRates(rates) {
-      this.rates = rates;
+    this.rates = rates;
   },
   setWallet(wallet) {
     this.wallet = wallet;
   },
   setbtcMarketChartData(btcMarketChartData) {
-    this.btcMarketChartData = btcMarketChartData
+    this.btcMarketChartData = btcMarketChartData;
   },
   setethMarketChartData(ethMarketChartData) {
-    this.ethMarketChartData = ethMarketChartData
-  }
+    this.ethMarketChartData = ethMarketChartData;
+  },
 });

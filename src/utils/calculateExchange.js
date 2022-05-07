@@ -8,7 +8,6 @@ export const calculateExchange = (
   rates
 ) => {
   if (value && target && currency && targetCurrency && rates) {
-    // console.log(rates);
     const accuracy = targetCurrency === "usd" ? 100 : 1000000;
     const btc1 = value / rates[currency].value;
     target =

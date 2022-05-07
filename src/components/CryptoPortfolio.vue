@@ -126,9 +126,6 @@ export default defineComponent({
   methods: {
     addCurrency() {
       const newWallet = this.store.wallet;
-      //   if (newWallet[this.inputCurrency] + this.inputValue > 100000) {
-      //     return;
-      //   }
       newWallet[this.inputCurrency] += this.inputValue;
 
       store.setWallet({ ...newWallet });
@@ -165,8 +162,6 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
 }
-.wallet-desriptive-balance {
-}
 .wallet-descriptive-entry {
   display: flex;
   flex-direction: row;
@@ -198,10 +193,7 @@ export default defineComponent({
 .inputs {
   display: flex;
   flex-direction: column;
-  /* flex-grow: 1; */
-  /* flex: ; */
   min-width: 30%;
-  /* row-gap: 1.5em; */
 }
 .button-wrapper {
   display: flex;
@@ -220,10 +212,6 @@ export default defineComponent({
 .button-wrapper > button:focus {
   outline: var(--color-gray-3) solid 2px;
 }
-/* .input > button {
-  flex-shrink: 0;
-  flex-grow: 1;
-} */
 .chart {
   flex-grow: 1;
 }
@@ -231,11 +219,6 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
 }
-/* @media only screen and (min-width: 920px) {
-  .portfolio-container {
-    flex-direction: row;
-  }
-} */
 @media only screen and (min-width: 1200px) {
   .portfolio-container {
     flex-direction: row;

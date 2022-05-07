@@ -46,8 +46,6 @@ import Home from "./components/HomePage.vue";
 import PortfolioPageVue from "./components/PortfolioPage.vue";
 import { store } from "./utils/store";
 import { initWallet } from "./utils/walletUtils";
-// import About from "./About.vue";
-// import NotFound from "./NotFound.vue";
 
 const routes = {
   "/": Home,
@@ -129,19 +127,14 @@ export default {
   --color-gray-3: #58667e;
 }
 body {
-  /* overflow: scroll; */
   margin: 1.5em;
-  /* height: calc(100vh - 3em); */
   font-family: "Roboto", sans-serif;
   background: var(--bg-color);
   color: var(--color-primary);
-  /* background: #27262e; */
-  /* color: #bb9f89; */
 }
 a {
   text-decoration: none;
   font-size: 1.3rem;
-  /* color: #bb9f89; */
 }
 
 h1,
@@ -182,7 +175,6 @@ header {
 }
 header > svg {
   width: 2em;
-  /* margin; */
   cursor: pointer;
 }
 

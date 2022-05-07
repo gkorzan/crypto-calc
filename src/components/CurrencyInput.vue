@@ -18,7 +18,6 @@
 
 <script>
 import { store } from "../utils/store";
-import { formatNumber } from "../utils/formatNumber";
 
 export default {
   props: {
@@ -65,12 +64,6 @@ export default {
       store,
       isInputError: false,
     };
-  },
-  mounted() {},
-  methods: {
-    validateInputField(inputValue) {
-      return inputValue.replace(/[^0-9]/g, "");
-    },
   },
 };
 </script>

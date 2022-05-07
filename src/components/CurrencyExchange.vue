@@ -47,15 +47,6 @@ export default defineComponent({
     const selectedCurrency1 = ref("btc");
     const selectedCurrency2 = ref("btc");
     const exchangeChartRef = ref();
-    // onMounted(() => {
-    //   // console.log(exchangeChartRef.value.chartInstance);
-    //   exchangeChartRef.value.chartInstance.toBase64Image();
-    // });
-    // let gradient = exchangeChartRef.value
-    //   .getContext("2d")
-    //   .createLinearGradient(0, 0, 0, 400); // from the bottom to the top
-    // gradient.addColorStop(0, "rgba(58,123,213,1)");
-    // gradient.addColorStop(1, "rgba(0,210,255,.3)");
 
     const chartData = computed(() => {
       if (!store.btcMarketChartData || !store.ethMarketChartData) {
@@ -77,7 +68,6 @@ export default defineComponent({
               store.btcMarketChartData
             );
           break;
-        // else return assembleExchangeChartData();
         case "eth":
           if (selectedCurrency2.value === "usd")
             return assembleExchangeChartData(store.ethMarketChartData);
@@ -183,7 +173,6 @@ export default defineComponent({
 .inputs {
   flex-grow: 1;
   min-width: 30%;
-  /* row-gap: 1.5em; */
 }
 .chart {
   flex-grow: 1;
