@@ -33,6 +33,7 @@ export const assembleExchangeChartData = (rawData1, rawData2, reverse) => {
     labels: dayLabels,
     datasets: [
       {
+        label: "Price",
         data: dayPrices,
         backgroundColor: [
           "#77CEFF",

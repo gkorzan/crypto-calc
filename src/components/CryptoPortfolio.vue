@@ -107,7 +107,7 @@ export default defineComponent({
         },
         title: {
           display: true,
-          text: "Asset Allocation Chart",
+          text: "Assets Allocation Chart",
         },
       },
     });

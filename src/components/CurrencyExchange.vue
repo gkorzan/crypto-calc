@@ -28,6 +28,8 @@
 import { store } from "../utils/store";
 import CurrencyInput from "./CurrencyInput.vue";
 import { calculateExchange } from "../utils/calculateExchange";
+import { formatNumber } from "../utils/formatNumber";
+
 import { assembleExchangeChartData } from "../utils/assembleExchangeChartData";
 import { ref, computed, defineComponent } from "vue";
 
@@ -117,8 +119,17 @@ export default defineComponent({
           position: "bottom",
         },
         title: {
-          display: false,
-          text: "Chart.js Doughnut Chart",
+          display: true,
+          text: "Currency Exchange Rate",
+        },
+      },
+      scales: {
+        y: {
+          ticks: {
+            callback: function (value) {
+              return selectedCurrency2.value + " " + formatNumber(value, 6, 2);
+            },
+          },
         },
       },
     });
