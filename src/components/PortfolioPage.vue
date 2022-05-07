@@ -8,7 +8,7 @@
 <script>
 import CryptoPortfolio from "./CryptoPortfolio.vue";
 export default {
-  name: "SecondPage",
+  name: "PortfolioPage",
   components: { CryptoPortfolio },
   setup() {},
 };

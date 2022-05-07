@@ -175,7 +175,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   background: var(--bg-card-color);
-  padding: 3em;
+  padding: 1.5em;
   border-radius: 16px;
   box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.2);
   gap: 1.5em;
@@ -191,6 +191,7 @@ export default defineComponent({
 @media only screen and (min-width: 1200px) {
   .exchange-container {
     flex-direction: row;
+    padding: 3em;
   }
 }
 </style>

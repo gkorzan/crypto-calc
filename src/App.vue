@@ -19,7 +19,7 @@
         </svg>
         <ul>
           <li><a href="#/">Home</a></li>
-          <li><a href="#/second">Second</a></li>
+          <li><a href="#/portfolio">Portfolio</a></li>
         </ul>
       </nav>
       <svg
@@ -43,7 +43,7 @@
 
 <script>
 import Home from "./components/HomePage.vue";
-import SecondPageVue from "./components/SecondPage.vue";
+import PortfolioPageVue from "./components/PortfolioPage.vue";
 import { store } from "./utils/store";
 import { initWallet } from "./utils/walletUtils";
 // import About from "./About.vue";
@@ -51,7 +51,7 @@ import { initWallet } from "./utils/walletUtils";
 
 const routes = {
   "/": Home,
-  "/second": SecondPageVue,
+  "/portfolio": PortfolioPageVue,
 };
 
 export default {
@@ -134,6 +134,7 @@ body {
   /* height: calc(100vh - 3em); */
   font-family: "Roboto", sans-serif;
   background: var(--bg-color);
+  color: var(--color-primary);
   /* background: #27262e; */
   /* color: #bb9f89; */
 }
@@ -142,12 +143,10 @@ a {
   font-size: 1.3rem;
   /* color: #bb9f89; */
 }
-h1 {
-  font-size: 3em;
-  margin-top: 2em;
-  line-height: 3.3rem;
+
+h1,
+h2 {
   color: var(--color-primary);
-  /* text-align: center; */
 }
 nav {
   position: fixed;
@@ -165,7 +164,7 @@ nav {
 nav > ul {
   list-style-type: none;
   padding: 0;
-  margin-top: 8em;
+  margin-top: 6em;
 }
 
 nav > ul > li > a {
@@ -196,6 +195,14 @@ header > svg {
 
 .open-nav {
   transform: translateX(0);
+}
+
+.logo {
+  color: var(--color-primary);
+}
+
+.logo > span {
+  color: var(--color-gray-3);
 }
 
 @media only screen and (min-width: 680px) {
@@ -238,6 +245,9 @@ header > svg {
     margin: 0 auto;
   }
   h1 {
+    font-size: 3em;
+    margin-top: 2em;
+    line-height: 3.3rem;
     text-align: center;
   }
 }

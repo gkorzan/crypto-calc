@@ -1,7 +1,7 @@
 <template>
   <div class="portfolio-container">
     <div class="stats">
-      <h2>Balance: {{ walletBalance }} $</h2>
+      <h2>Balance: {{ formatNumber(walletBalance) }} $</h2>
       <div class="inputs">
         <currency-input
           v-model:amount="inputValue"
@@ -23,10 +23,21 @@
               {{ store.rates[key].name }} :
             </div>
           </span>
-          <div class="currency-value">
-            {{ value }}
+          <div class="currency-value" v-if="key === 'usd'">
+            {{ formatNumber(value, 2) }}
           </div>
-          <button>clear</button>
+          <div class="currency-value" v-else>
+            {{ formatNumber(value, 6) }}
+          </div>
+          <button
+            @click="
+              () => {
+                clearCurrency(key);
+              }
+            "
+          >
+            Clear
+          </button>
         </div>
       </div>
     </div>
@@ -46,6 +57,7 @@ import CurrencyInput from "./CurrencyInput.vue";
 
 import { store } from "../utils/store";
 import { assembleWalletChartData } from "../utils/assembleWalletChartData";
+import { formatNumber } from "../utils/formatNumber";
 
 import { DoughnutChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
@@ -58,9 +70,6 @@ export default defineComponent({
   setup() {
     const inputValue = ref(0);
     const inputCurrency = ref("btc");
-    console.log(store);
-
-    // const rates = this.store.rates;
 
     const walletBalance = computed(() => {
       let walletBalance = 0;
@@ -94,11 +103,11 @@ export default defineComponent({
       responsive: true,
       plugins: {
         legend: {
-          position: "top",
+          position: "bottom",
         },
         title: {
           display: true,
-          text: "Chart.js Doughnut Chart",
+          text: "Asset Allocation Chart",
         },
       },
     });
@@ -111,6 +120,7 @@ export default defineComponent({
       options,
       assetAllocationChartRef,
       walletBalance,
+      formatNumber,
     };
   },
   methods: {
@@ -134,7 +144,9 @@ export default defineComponent({
 
       store.setWallet({ ...newWallet });
     },
-    clearCurrency() {},
+    clearCurrency(currency) {
+      store.wallet[currency] = 0;
+    },
   },
 });
 </script>
@@ -144,7 +156,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   background: var(--bg-card-color);
-  padding: 3em;
+  padding: 1.5em;
   border-radius: 16px;
   box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.2);
   gap: 1.5em;
@@ -174,7 +186,7 @@ export default defineComponent({
   color: var(--color-primary);
 }
 .wallet-desriptive-balance > div > button:focus {
-  border: solid 2px black;
+  outline: var(--color-gray-3) solid 2px;
 }
 .currency-value {
   display: flex;
@@ -206,7 +218,7 @@ export default defineComponent({
   color: var(--color-primary);
 }
 .button-wrapper > button:focus {
-  border: solid 2px black;
+  outline: var(--color-gray-3) solid 2px;
 }
 /* .input > button {
   flex-shrink: 0;
@@ -227,6 +239,7 @@ export default defineComponent({
 @media only screen and (min-width: 1200px) {
   .portfolio-container {
     flex-direction: row;
+    padding: 3em;
   }
 }
 </style>
