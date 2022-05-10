@@ -38,13 +38,16 @@ Mobile first Vue application capable of calculating crypto currency exchange rat
 ```
 yarn install
 ```
-
 #### Compiles and hot-reloads for development
 ```
 yarn serve
 ```
-
 #### Compiles and minifies for production
 ```
 yarn build
 ```
+
+**Acknowledgements**
+---
+
++ [@darina-trotskaya](https://github.com/darina-trotskaya) for being supportive.
