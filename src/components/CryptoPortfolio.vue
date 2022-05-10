@@ -148,7 +148,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .portfolio-container {
   display: flex;
   flex-direction: column;
@@ -158,67 +158,69 @@ export default defineComponent({
   box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.2);
   gap: 1.5em;
 }
+
 .stats {
   display: flex;
-  flex-direction: column;
-}
-.wallet-descriptive-entry {
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  gap: 1.5em;
-  margin-bottom: 15px;
-}
-.wallet-desriptive-balance > div > button {
-  flex-grow: 1;
-  flex-shrink: 0;
-  max-width: 250px;
-  padding: 10px;
-  background-color: var(--bg-card-color);
-  border-radius: var(--border-radius);
-  border: solid 1px var(--divider);
-  color: var(--color-primary);
-}
-.wallet-desriptive-balance > div > button:focus {
-  outline: var(--color-gray-3) solid 2px;
-}
-.currency-value {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  overflow: auto;
-}
-.inputs {
-  display: flex;
   flex-direction: column;
-  min-width: 30%;
+  .currency-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    overflow: auto;
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    min-width: 30%;
+    .button-wrapper {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+      button {
+        flex-grow: 1;
+        max-width: 250px;
+        padding: 10px;
+        background-color: var(--bg-card-color);
+        border-radius: var(--border-radius);
+        border: solid 1px var(--divider);
+        color: var(--color-primary);
+      }
+      button:focus {
+        outline: var(--color-gray-3) solid 2px;
+      }
+    }
+  }
+  .wallet-desriptive-balance {
+    .wallet-descriptive-entry {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5em;
+      margin-bottom: 15px;
+    }
+    button {
+      flex-grow: 1;
+      flex-shrink: 0;
+      max-width: 250px;
+      padding: 10px;
+      background-color: var(--bg-card-color);
+      border-radius: var(--border-radius);
+      border: solid 1px var(--divider);
+      color: var(--color-primary);
+    }
+    button:focus {
+      outline: var(--color-gray-3) solid 2px;
+    }
+  }
 }
-.button-wrapper {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 15px;
-}
-.button-wrapper > button {
-  flex-grow: 1;
-  max-width: 250px;
-  padding: 10px;
-  background-color: var(--bg-card-color);
-  border-radius: var(--border-radius);
-  border: solid 1px var(--divider);
-  color: var(--color-primary);
-}
-.button-wrapper > button:focus {
-  outline: var(--color-gray-3) solid 2px;
-}
+
 .chart {
   flex-grow: 1;
 }
-.stats {
-  display: flex;
-  justify-content: space-between;
-}
+
 @media only screen and (min-width: 1200px) {
   .portfolio-container {
     flex-direction: row;
