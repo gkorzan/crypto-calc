@@ -18,11 +18,9 @@
           :key="key"
           class="wallet-descriptive-entry"
         >
-          <span style="display: flex; justify-content: space-between">
-            <div style="width: 80px; text-align: right; padding-right: 0.75em">
-              {{ store.rates[key].name }} :
-            </div>
-          </span>
+          <div class="wallet-entry-name">
+            <span style="min-width: 80px">{{ store.rates[key].name }} :</span>
+          </div>
           <div class="currency-value" v-if="key === 'usd'">
             {{ formatNumber(value, 2) }}
           </div>
@@ -200,6 +198,11 @@ export default defineComponent({
       align-items: center;
       gap: 1.5em;
       margin-bottom: 15px;
+      .wallet-entry-name {
+        display: flex;
+        justify-content: space-between;
+        text-align: right;
+      }
     }
     button {
       flex-grow: 1;
