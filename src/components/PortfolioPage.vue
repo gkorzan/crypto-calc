@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Crypto-Portfolio</h1>
+    <h1>Portfolio</h1>
     <crypto-portfolio />
   </div>
 </template>

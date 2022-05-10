@@ -1,7 +1,7 @@
 <template>
   <div class="portfolio-container">
     <div class="stats">
-      <h2>Balance: {{ formatNumber(walletBalance) }} $</h2>
+      <h2 class="balance">Balance: {{ formatNumber(walletBalance) }} $</h2>
       <div class="inputs">
         <currency-input
           v-model:amount="inputValue"
@@ -161,6 +161,11 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  .balance {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .currency-value {
     display: flex;
     align-items: center;

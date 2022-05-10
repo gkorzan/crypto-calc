@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <header>
-      <a href="#" class="logo">Block<span>Task</span></a>
+      <a href="#" class="logo">Crypto<span>Calc</span></a>
       <nav :class="{ opened: isMenuOpened }">
         <img :src="closeSvgPath" class="close" @click="closeMenu" />
         <ul>

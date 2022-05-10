@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Blockchain Task Solution</h1>
+    <h1>Exchange Calculator</h1>
     <currency-exchange />
   </div>
 </template>
