@@ -1,4 +1,4 @@
-# modal-project
+# Crypto calculator
 
 ## Project setup
 ```
