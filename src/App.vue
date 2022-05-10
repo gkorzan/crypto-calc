@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <header>
       <a href="#" class="logo">Block<span>Task</span></a>
-      <nav>
+      <nav :class="{ opened: isMenuOpened }">
         <img :src="closeSvgPath" class="close" @click="closeMenu" />
         <ul>
           <li><a href="#/">Home</a></li>
@@ -10,20 +10,6 @@
         </ul>
       </nav>
       <img :src="menuSvgPath" class="menu" @click="openMenu" />
-      <!-- <svg
-        @click="openMenu"
-        class="menu"
-        width="48"
-        height="32"
-        viewBox="0 0 48 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M24 32H0V26.6667H24V32ZM48 18.6667H0V13.3333H48V18.6667ZM48 5.33333H24V0H48V5.33333Z"
-          fill="#27292f"
-        />
-      </svg> -->
     </header>
     <component :is="currentView" />
   </div>
@@ -50,6 +36,7 @@ export default {
       store,
       closeSvgPath,
       menuSvgPath,
+      isMenuOpened: false,
     };
   },
   computed: {
@@ -98,12 +85,10 @@ export default {
       store.setethMarketChartData(ethMarketChartData);
     },
     openMenu() {
-      const nav = document.querySelector("nav");
-      nav.classList.add("open-nav");
+      this.isMenuOpened = true;
     },
     closeMenu() {
-      const nav = document.querySelector("nav");
-      nav.classList.remove("open-nav");
+      this.isMenuOpened = false;
     },
   },
 };
@@ -163,10 +148,10 @@ nav {
 header {
   display: flex;
   justify-content: space-between;
-}
-header > svg {
-  width: 2em;
-  cursor: pointer;
+  .menu {
+    width: 2em;
+    cursor: pointer;
+  }
 }
 
 .close {
@@ -176,16 +161,15 @@ header > svg {
   cursor: pointer;
 }
 
-.open-nav {
+.opened {
   transform: translateX(0);
 }
 
 .logo {
   color: var(--color-primary);
-}
-
-.logo > span {
-  color: var(--color-gray-3);
+  span {
+    color: var(--color-gray-3);
+  }
 }
 
 @media only screen and (min-width: 680px) {
